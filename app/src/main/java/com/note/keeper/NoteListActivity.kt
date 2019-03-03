@@ -3,7 +3,7 @@ package com.note.keeper
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.ArrayAdapter
+import android.support.v7.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_note_list.*
 import kotlinx.android.synthetic.main.content_note_list.*
 
@@ -19,24 +19,10 @@ class NoteListActivity : AppCompatActivity() {
             startActivity(activityIntent)
         }
 
-        listNotes.adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            DataManager.notes
-        )
+        // bind list items to the RecyclerView
+        listItems.layoutManager = LinearLayoutManager(this)
 
-        listNotes.setOnItemClickListener { parent, view, position, id ->
-            val activityIntent = Intent(this, NoteActivity::class.java)
-            activityIntent.putExtra(NOTE_POSITION, position)
-            startActivity(activityIntent)
-        }
-
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // inform that data has changed
-        (listNotes.adapter as ArrayAdapter<NoteInfo>).notifyDataSetChanged()
+        listItems.adapter = NoteRecyclerAdaper(this, DataManager.notes)
     }
 
 }
