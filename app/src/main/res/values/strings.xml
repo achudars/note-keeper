@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">note-keeper</string>
     <string name="action_settings">Settings</string>
-    <string name="textDisplayedValue">1</string>
 </resources>

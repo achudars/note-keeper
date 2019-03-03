@@ -1,12 +1,10 @@
 package com.note.keeper
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,13 +12,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            val originalValue = textDisplayedValue.text.toString().toInt()
-            val newValue = originalValue * 2
-            textDisplayedValue.text = newValue.toString()
-            Snackbar.make(view, "Value $originalValue changed to $newValue", Snackbar.LENGTH_LONG).show()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
