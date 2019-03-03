@@ -1,11 +1,15 @@
 package com.note.keeper
 
-class DataManager {
+/**
+ * By making DataManager an object and not a class we can enforce Singleton pattern
+ */
+object DataManager {
     val courses = HashMap<String, CourseInfo>()
     val notes = ArrayList<NoteInfo>()
 
     init {
         initialiseCourses()
+        initialiseNotes()
     }
 
     private fun initialiseCourses() {
@@ -20,5 +24,8 @@ class DataManager {
 
         course = CourseInfo(courseTitle = "Java Fundamentals: The Core Platform", courseId = "java_core")
         courses[course.courseId] = course
+    }
+
+    private fun initialiseNotes() {
     }
 }
