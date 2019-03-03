@@ -4,7 +4,8 @@
       tools:context="com.note.keeper.MainActivity">
     <item android:id="@+id/action_next"
           android:title="@string/action_next"
-          android:orderInCategory="100"/>
+          android:orderInCategory="100" app:showAsAction="ifRoom|withText"
+          android:icon="@drawable/ic_forward_white_24dp"/>
     <item android:id="@+id/action_settings"
           android:title="@string/action_settings"
           android:orderInCategory="101"
