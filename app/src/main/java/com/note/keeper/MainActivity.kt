@@ -25,10 +25,14 @@ class MainActivity : AppCompatActivity() {
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerCourses.adapter = adapterCourses
 
+        // this indicates which note to display
         notePosition = intent.getIntExtra(EXTRA_NOTE_POSITION, POSITION_NOT_SET)
 
         if (notePosition != POSITION_NOT_SET) {
             displayNote()
+        } else {
+            DataManager.notes.add(NoteInfo())
+            notePosition = DataManager.notes.lastIndex
         }
     }
 
@@ -76,5 +80,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveNote()
+    }
+
+    private fun saveNote() {
+        val note = DataManager.notes[notePosition]
+        note.noteTitle = textNoteTitle.text.toString()
+        note.noteText = textNoteText.text.toString()
+        note.course = spinnerCourses.selectedItem as CourseInfo // casting here
     }
 }
