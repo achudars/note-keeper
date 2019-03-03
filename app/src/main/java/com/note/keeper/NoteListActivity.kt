@@ -22,7 +22,12 @@ class NoteListActivity : AppCompatActivity() {
         // bind list items to the RecyclerView
         listItems.layoutManager = LinearLayoutManager(this)
 
-        listItems.adapter = NoteRecyclerAdaper(this, DataManager.notes)
+        listItems.adapter = NoteRecyclerAdapter(this, DataManager.notes)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        listItems.adapter?.notifyDataSetChanged() // ok, for small data sets, not good for large ones
     }
 
 }

@@ -1,14 +1,15 @@
 package com.note.keeper
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-class NoteRecyclerAdaper(private val context: Context, private val notes: List<NoteInfo>) :
-    RecyclerView.Adapter<NoteRecyclerAdaper.ViewHolder>() {
+class NoteRecyclerAdapter(private val context: Context, private val notes: List<NoteInfo>) :
+    RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
 
@@ -24,12 +25,27 @@ class NoteRecyclerAdaper(private val context: Context, private val notes: List<N
         val note = notes[position]
         holder.textCourse?.text = note.course?.courseTitle
         holder.textTitle?.text = note.noteTitle
+        holder.notePosition = position
     }
 
-    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+    /**
+     * must be inner in order to access the members of the containing NoteRecyclerAdapter class
+     */
+    inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         // get reference to textView
         val textCourse = itemView?.findViewById<TextView?>(R.id.textCourse)
         val textTitle = itemView?.findViewById<TextView?>(R.id.textTitle)
+        // handle user interaction
+        var notePosition = 0
+
+        init {
+            itemView?.setOnClickListener {
+                // ViewHolder must be inner class in order to have access to the context
+                val intent = Intent(context, NoteActivity::class.java)
+                intent.putExtra(NOTE_POSITION, notePosition)
+                context.startActivity(intent)
+            }
+        }
     }
 
 }
