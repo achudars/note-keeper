@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".MainActivity"
+                android:name=".NoteActivity"
                 android:label="@string/edit_note_name"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
