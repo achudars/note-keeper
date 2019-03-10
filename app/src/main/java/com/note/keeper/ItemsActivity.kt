@@ -3,6 +3,7 @@ package com.note.keeper
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -54,9 +55,9 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.action_settings -> true
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -64,21 +65,25 @@ class ItemsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_notes -> {
-                // Handle the camera action
+                handleSelection("Notes")
             }
             R.id.nav_courses -> {
-
+                handleSelection("Courses")
             }
             R.id.nav_share -> {
-
+                handleSelection("Don't you think you've shared enough?")
             }
             R.id.nav_send -> {
-
+                handleSelection("Send")
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun handleSelection(message: String) {
+        Snackbar.make(listItems, message, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onResume() {
