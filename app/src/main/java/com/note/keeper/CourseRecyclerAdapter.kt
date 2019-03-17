@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.note.keeper.CourseInfo
 import com.note.keeper.R
 
-class CourseRecyclerAdapter(private val context: Context, private val courses: List<CourseInfo>) :
+class CourseRecyclerAdapter(context: Context, private val courses: List<CourseInfo>) :
     RecyclerView.Adapter<CourseRecyclerAdapter.ViewHolder>() {
     private val layoutInflater = LayoutInflater.from(context)
 
